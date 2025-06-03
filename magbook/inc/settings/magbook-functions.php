@@ -353,7 +353,11 @@ function magbook_post_categories_list() {
 add_action( 'magbook_post_categories_list_id', 'magbook_post_categories_list' );
 
 /*************************** Adding Category to menu ****************************************/
-$magbook_settings = magbook_get_theme_options();
+function magbook_setup_theme_settings() {
+    // Now it's safe to retrieve theme options and use translations
+    $GLOBALS['magbook_settings'] = magbook_get_theme_options();
+}
+add_action( 'after_setup_theme', 'magbook_setup_theme_settings' );
 	function magbook_category_nav_class( $classes, $item ){
 	    if( 'category' == $item->object ){
 	        $category = get_category( $item->object_id );
